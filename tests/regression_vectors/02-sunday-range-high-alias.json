@@ -1,0 +1,9 @@
+{
+  "title": "Friday-through-7 includes Sunday but not Monday",
+  "expression": "0 17 * JUN FRI-7",
+  "zone": "UTC",
+  "after": "2030-06-06T17:00Z",
+  "count": 4,
+  "search_days": 8,
+  "expected_utc": ["2030-06-07T17:00Z", "2030-06-08T17:00Z", "2030-06-09T17:00Z", "2030-06-14T17:00Z"]
+}
