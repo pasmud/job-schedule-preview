@@ -1,0 +1,9 @@
+{
+  "title": "Mixed-case weekday range skips the weekend",
+  "expression": "25 8 * mAr wEd-fRI",
+  "zone": "UTC",
+  "after": "2030-03-08T08:25Z",
+  "count": 3,
+  "search_days": 7,
+  "expected_utc": ["2030-03-13T08:25Z", "2030-03-14T08:25Z", "2030-03-15T08:25Z"]
+}

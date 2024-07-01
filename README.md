@@ -103,3 +103,13 @@ python -m pip install '.[dev]'
 python -m ruff check .
 python -m pytest -q
 ```
+
+### Regression vectors
+
+The synthetic cases in `tests/regression_vectors/` check concrete UTC previews
+for named calendar fields, stepped schedules, local month and year boundaries,
+and daylight-saving gaps and folds. Expected instants are fixed from calendar
+dates and UTC offsets, independently of the preview implementation.
+
+Run the corpus with `python -m pytest -q tests/test_regression_vectors.py`.
+Use `-k` with a filename slug to run an individual case.
