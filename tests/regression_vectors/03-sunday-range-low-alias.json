@@ -1,0 +1,9 @@
+{
+  "title": "Stepping SUN-TUE starts at Sunday zero",
+  "expression": "10 7 * JUL SUN-TUE/2",
+  "zone": "UTC",
+  "after": "2030-07-05T00:00Z",
+  "count": 3,
+  "search_days": 10,
+  "expected_utc": ["2030-07-07T07:10Z", "2030-07-09T07:10Z", "2030-07-14T07:10Z"]
+}
