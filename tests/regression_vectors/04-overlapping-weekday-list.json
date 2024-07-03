@@ -1,0 +1,9 @@
+{
+  "title": "Overlapping named weekday ranges emit each date once",
+  "expression": "0 12 * APR WED-FRI,MON-WED,3",
+  "zone": "UTC",
+  "after": "2030-04-02T12:00Z",
+  "count": 4,
+  "search_days": 7,
+  "expected_utc": ["2030-04-03T12:00Z", "2030-04-04T12:00Z", "2030-04-05T12:00Z", "2030-04-08T12:00Z"]
+}
