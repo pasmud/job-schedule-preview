@@ -1,0 +1,9 @@
+{
+  "title": "Unsorted month list skips unselected months in calendar order",
+  "expression": "40 6 1 JUL,FEB,4 *",
+  "zone": "UTC",
+  "after": "2030-01-15T00:00Z",
+  "count": 3,
+  "search_days": 175,
+  "expected_utc": ["2030-02-01T06:40Z", "2030-04-01T06:40Z", "2030-07-01T06:40Z"]
+}
