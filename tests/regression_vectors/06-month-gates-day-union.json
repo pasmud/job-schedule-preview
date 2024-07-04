@@ -1,0 +1,12 @@
+{
+  "title": "Month restriction gates both branches of the day union",
+  "expression": "0 9 30 APR MON",
+  "zone": "UTC",
+  "after": "2030-03-30T00:00Z",
+  "count": 7,
+  "search_days": 45,
+  "expected_utc": [
+    "2030-04-01T09:00Z", "2030-04-08T09:00Z", "2030-04-15T09:00Z",
+    "2030-04-22T09:00Z", "2030-04-29T09:00Z", "2030-04-30T09:00Z"
+  ]
+}
