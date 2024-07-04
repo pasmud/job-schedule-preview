@@ -1,0 +1,9 @@
+{
+  "title": "Day union includes non-Mondays and deduplicates a Monday",
+  "expression": "0 16 14-16 APR MON",
+  "zone": "UTC",
+  "after": "2030-04-08T16:00Z",
+  "count": 4,
+  "search_days": 15,
+  "expected_utc": ["2030-04-14T16:00Z", "2030-04-15T16:00Z", "2030-04-16T16:00Z", "2030-04-22T16:00Z"]
+}
