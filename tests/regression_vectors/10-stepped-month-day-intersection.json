@@ -1,0 +1,9 @@
+{
+  "title": "Day-of-month wildcard step intersects named Tuesdays",
+  "expression": "0 9 */3 JAN TUE",
+  "zone": "UTC",
+  "after": "2029-12-31T23:59Z",
+  "count": 3,
+  "search_days": 31,
+  "expected_utc": ["2030-01-01T09:00Z", "2030-01-22T09:00Z"]
+}
