@@ -1,0 +1,9 @@
+{
+  "title": "A stepped weekday wildcard intersects the day-of-month list",
+  "expression": "0 10 4,5,6,7 APR */3",
+  "zone": "UTC",
+  "after": "2030-04-03T00:00Z",
+  "count": 3,
+  "search_days": 6,
+  "expected_utc": ["2030-04-06T10:00Z", "2030-04-07T10:00Z"]
+}
