@@ -25,6 +25,18 @@ def test_text_output_disambiguates_two_folded_minutes():
     ]
 
 
+def test_cli_accepts_named_month_and_weekday_range():
+    result = run_cli(
+        "0 9 * JAN MON-FRI", "--zone", "UTC", "--after", "2029-12-31T09:00Z", "--count", "2",
+    )
+    assert result.returncode == 0
+    assert result.stderr == ""
+    assert result.stdout.splitlines() == [
+        "2030-01-01T09:00:00+00:00\t2030-01-01T09:00:00Z",
+        "2030-01-02T09:00:00+00:00\t2030-01-02T09:00:00Z",
+    ]
+
+
 def test_json_output_with_partial_results_and_normalized_start():
     result = run_cli(
         "0 0 * * *", "--zone", "UTC", "--after", "2030-01-01T00:30:01.250+01:00",

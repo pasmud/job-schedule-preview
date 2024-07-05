@@ -12,7 +12,12 @@ _FIELDS = (
     ("month", 1, 12),
     ("day of week", 0, 7),
 )
-_ITEM = re.compile(r"(?P<start>\*|[0-9]{1,2})(?:-(?P<end>[0-9]{1,2}))?(?:/(?P<step>[0-9]{1,2}))?")
+_NAMES = {
+    "month": dict(zip("JAN FEB MAR APR MAY JUN JUL AUG SEP OCT NOV DEC".split(), range(1, 13))),
+    "day of week": dict(zip("SUN MON TUE WED THU FRI SAT".split(), range(7))),
+}
+_VALUE = r"[0-9]{1,2}|[A-Za-z]{3}"
+_ITEM = re.compile(rf"(?P<start>\*|{_VALUE})(?:-(?P<end>{_VALUE}))?(?:/(?P<step>[0-9]{{1,2}}))?")
 
 
 class CronError(ValueError):
@@ -52,6 +57,15 @@ class CronExpression:
                     yield datetime.combine(day, time(hour, minute))
 
 
+def _parse_value(token: str, field: str) -> int:
+    if token.isdecimal():
+        return int(token)
+    try:
+        return _NAMES[field][token.upper()]
+    except KeyError:
+        raise CronError(f"{field}: invalid name {token!r}") from None
+
+
 def _parse_field(text: str, name: str, low: int, high: int) -> _Field:
     items = text.split(",")
     if len(items) > 1 and "*" in text:
@@ -72,7 +86,8 @@ def _parse_field(text: str, name: str, low: int, high: int) -> _Field:
                 raise CronError(f"{name}: invalid item {item!r}")
             first, last = low, high
         else:
-            first, last = int(start), int(end) if end is not None else int(start)
+            first = _parse_value(start, name)
+            last = _parse_value(end, name) if end is not None else first
             if not (low <= first <= high and low <= last <= high):
                 raise CronError(f"{name}: values must be from {low} to {high}; got {item!r}")
             if first > last:

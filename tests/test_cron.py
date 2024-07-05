@@ -24,6 +24,9 @@ def test_lists_ranges_and_steps_expand_in_order_without_duplicates():
         ("0 9 1-31 4 1", list(range(1, 31))),  # A full range is not syntactically '*'.
         ("0 9 * 4 0,7", [7, 14, 21, 28]),
         ("0 9 * 4 6-7", [6, 7, 13, 14, 20, 21, 27, 28]),
+        ("0 9 16 aPr Mon", [1, 8, 15, 16, 22, 29]),
+        ("0 9 * ApR suN,0,7", [7, 14, 21, 28]),
+        ("0 9 * 4 mon-5/2", [1, 3, 5, 8, 10, 12, 15, 17, 19, 22, 24, 26, 29]),
     ],
 )
 def test_day_fields_and_sunday_alias(expression, expected_days):
@@ -35,6 +38,13 @@ def test_day_fields_and_sunday_alias(expression, expected_days):
     assert actual_days == expected_days
 
 
+def test_named_months_mix_with_numeric_values_in_lists_and_stepped_ranges():
+    schedule = parse_cron("0 9 1 jAn,3-JUL/2,Nov,7 *")
+    assert [
+        wall.month for month in range(1, 13) for wall in schedule.wall_times(date(2030, month, 1))
+    ] == [1, 3, 5, 7, 11]
+
+
 @pytest.mark.parametrize(
     ("expression", "message"),
     [
@@ -43,7 +53,15 @@ def test_day_fields_and_sunday_alias(expression, expected_days):
         ("0 0 * 13 *", "month"),
         ("0 0 * * 8", "day of week"),
         ("0 0 * * 5-1", "ascending"),
-        ("0 0 * * MON", "day of week"),
+        ("0 0 * * MOO", "day of week"),
+        ("0 0 * JAX *", "month"),
+        ("0 0 * JANUARY *", "month"),
+        ("JAN 0 * * *", "minute"),
+        ("0 0 * MON *", "month"),
+        ("0 0 * * JAN", "day of week"),
+        ("0 0 * NOV-FEB *", "ascending"),
+        ("0 0 * * FRI-SUN", "ascending"),
+        ("0 0 * * MON/2", "explicit range"),
         ("0 0 L * *", "day of month"),
         ("0 0 * * 2#3", "day of week"),
         ("0 0 * * ?", "day of week"),

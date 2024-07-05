@@ -53,7 +53,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         description="Preview five-field cron occurrences offline; never execute jobs.",
         allow_abbrev=False,
     )
-    parser.add_argument("expression", help="quoted five-field numeric cron expression")
+    parser.add_argument("expression", help="quoted five-field cron expression (month/day names allowed)")
     parser.add_argument("--zone", required=True, type=_parse_zone, help="IANA time zone (e.g. UTC)")
     parser.add_argument("--after", required=True, type=_parse_after, help="exclusive timestamp with offset")
     parser.add_argument(
