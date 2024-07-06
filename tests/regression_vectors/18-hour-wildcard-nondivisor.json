@@ -1,0 +1,9 @@
+{
+  "title": "A seven-hour wildcard step restarts at zero the next day",
+  "expression": "12 */7 * DEC SUN-MON",
+  "zone": "UTC",
+  "after": "2030-12-01T14:12Z",
+  "count": 4,
+  "search_days": 2,
+  "expected_utc": ["2030-12-01T21:12Z", "2030-12-02T00:12Z", "2030-12-02T07:12Z", "2030-12-02T14:12Z"]
+}
