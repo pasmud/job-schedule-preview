@@ -1,0 +1,9 @@
+{
+  "title": "A day-of-month range restarts at its lower bound each month",
+  "expression": "0 11 2-30/7 FEB-MAR *",
+  "zone": "UTC",
+  "after": "2030-02-22T00:00Z",
+  "count": 3,
+  "search_days": 20,
+  "expected_utc": ["2030-02-23T11:00Z", "2030-03-02T11:00Z", "2030-03-09T11:00Z"]
+}
