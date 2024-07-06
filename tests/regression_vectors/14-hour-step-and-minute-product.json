@@ -1,0 +1,9 @@
+{
+  "title": "Stepped hours each restart the selected minute list",
+  "expression": "50,10 7-11/3 * AUG THU",
+  "zone": "UTC",
+  "after": "2030-08-01T07:10Z",
+  "count": 4,
+  "search_days": 8,
+  "expected_utc": ["2030-08-01T07:50Z", "2030-08-01T10:10Z", "2030-08-01T10:50Z", "2030-08-08T07:10Z"]
+}
