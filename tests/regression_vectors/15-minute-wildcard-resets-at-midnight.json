@@ -1,0 +1,9 @@
+{
+  "title": "A wildcard minute interval resets at local midnight",
+  "expression": "*/23 23,0 * SEP SUN-MON",
+  "zone": "Asia/Kolkata",
+  "after": "2030-09-01T23:23+05:30",
+  "count": 4,
+  "search_days": 1,
+  "expected_utc": ["2030-09-01T18:16Z", "2030-09-01T18:30Z", "2030-09-01T18:53Z", "2030-09-01T19:16Z"]
+}
