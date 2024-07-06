@@ -1,0 +1,9 @@
+{
+  "title": "Minute range steps from its lower bound, not zero",
+  "expression": "04-22/7 8 * FEB FRI",
+  "zone": "UTC",
+  "after": "2030-02-01T08:03Z",
+  "count": 4,
+  "search_days": 8,
+  "expected_utc": ["2030-02-01T08:04Z", "2030-02-01T08:11Z", "2030-02-01T08:18Z", "2030-02-08T08:04Z"]
+}
