@@ -1,0 +1,12 @@
+{
+  "title": "Overlapping hour and minute entries do not inflate count",
+  "expression": "10-30/10,20 7-9/2,9 * OCT TUE",
+  "zone": "UTC",
+  "after": "2030-10-01T07:19Z",
+  "count": 5,
+  "search_days": 1,
+  "expected_utc": [
+    "2030-10-01T07:20Z", "2030-10-01T07:30Z", "2030-10-01T09:10Z",
+    "2030-10-01T09:20Z", "2030-10-01T09:30Z"
+  ]
+}
