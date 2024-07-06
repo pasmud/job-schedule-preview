@@ -1,0 +1,9 @@
+{
+  "title": "Adjacent named months do not duplicate boundary weekdays",
+  "expression": "5 0 * APR-MAY TUE-THU",
+  "zone": "UTC",
+  "after": "2030-04-29T23:00Z",
+  "count": 4,
+  "search_days": 9,
+  "expected_utc": ["2030-04-30T00:05Z", "2030-05-01T00:05Z", "2030-05-02T00:05Z", "2030-05-07T00:05Z"]
+}
