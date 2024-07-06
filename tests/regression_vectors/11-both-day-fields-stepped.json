@@ -1,0 +1,9 @@
+{
+  "title": "Two stepped day wildcards must both match",
+  "expression": "35 6 */5 MAY */2",
+  "zone": "UTC",
+  "after": "2030-04-30T23:59Z",
+  "count": 4,
+  "search_days": 32,
+  "expected_utc": ["2030-05-11T06:35Z", "2030-05-16T06:35Z", "2030-05-21T06:35Z", "2030-05-26T06:35Z"]
+}
