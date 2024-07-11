@@ -1,0 +1,9 @@
+{
+  "title": "Month wildcard steps start at January in each year",
+  "expression": "20 6 1 */5 *",
+  "zone": "UTC",
+  "after": "2030-10-01T00:00Z",
+  "count": 3,
+  "search_days": 250,
+  "expected_utc": ["2030-11-01T06:20Z", "2031-01-01T06:20Z", "2031-06-01T06:20Z"]
+}
