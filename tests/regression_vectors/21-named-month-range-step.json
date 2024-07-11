@@ -1,0 +1,9 @@
+{
+  "title": "A named month step starts at February and stops before October",
+  "expression": "0 4 1 FEB-OCT/3 *",
+  "zone": "UTC",
+  "after": "2030-04-30T00:00Z",
+  "count": 3,
+  "search_days": 280,
+  "expected_utc": ["2030-05-01T04:00Z", "2030-08-01T04:00Z", "2031-02-01T04:00Z"]
+}
