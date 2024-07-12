@@ -1,0 +1,9 @@
+{
+  "title": "Impossible February 30 leaves the Friday branch active",
+  "expression": "20 5 30 FEB FRI",
+  "zone": "UTC",
+  "after": "2030-02-21T23:59Z",
+  "count": 2,
+  "search_days": 12,
+  "expected_utc": ["2030-02-22T05:20Z"]
+}
