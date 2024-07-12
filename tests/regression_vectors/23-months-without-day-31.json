@@ -1,0 +1,9 @@
+{
+  "title": "Named month range skips months without the 31st",
+  "expression": "55 23 31 APR-AUG *",
+  "zone": "UTC",
+  "after": "2030-04-29T00:00Z",
+  "count": 4,
+  "search_days": 130,
+  "expected_utc": ["2030-05-31T23:55Z", "2030-07-31T23:55Z", "2030-08-31T23:55Z"]
+}
