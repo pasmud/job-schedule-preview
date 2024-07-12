@@ -1,0 +1,9 @@
+{
+  "title": "Local March Monday starts on leap day in UTC",
+  "expression": "10 0 * MAR MON",
+  "zone": "Asia/Kathmandu",
+  "after": "2032-02-29T00:00Z",
+  "count": 2,
+  "search_days": 8,
+  "expected_utc": ["2032-02-29T18:25Z", "2032-03-07T18:25Z"]
+}
