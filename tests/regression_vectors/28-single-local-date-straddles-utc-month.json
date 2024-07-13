@@ -1,0 +1,9 @@
+{
+  "title": "One local April date contributes to two UTC months",
+  "expression": "45 16-20/2 30 APR *",
+  "zone": "America/Phoenix",
+  "after": "2030-04-30T23:44Z",
+  "count": 4,
+  "search_days": 2,
+  "expected_utc": ["2030-04-30T23:45Z", "2030-05-01T01:45Z", "2030-05-01T03:45Z"]
+}
