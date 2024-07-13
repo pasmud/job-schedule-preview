@@ -1,0 +1,9 @@
+{
+  "title": "An exclusive start a microsecond early keeps the next minute",
+  "expression": "0 9 * JAN TUE",
+  "zone": "Asia/Tokyo",
+  "after": "2029-12-31T23:59:59.999999Z",
+  "count": 1,
+  "search_days": 1,
+  "expected_utc": ["2030-01-01T00:00Z"]
+}
