@@ -1,0 +1,9 @@
+{
+  "title": "A sparse match exactly at the elapsed horizon is included",
+  "expression": "15 0 1 MAY *",
+  "zone": "Asia/Tokyo",
+  "after": "2030-04-29T19:15+04:00",
+  "count": 2,
+  "search_days": 1,
+  "expected_utc": ["2030-04-30T15:15Z"]
+}
