@@ -1,0 +1,10 @@
+{
+  "title": "Inclusive start compares instants across distinct offsets",
+  "expression": "10,20 8 * JAN TUE",
+  "zone": "Asia/Kolkata",
+  "after": "2029-12-31T22:40-04:00",
+  "count": 2,
+  "search_days": 1,
+  "include_start": true,
+  "expected_utc": ["2030-01-01T02:40Z", "2030-01-01T02:50Z"]
+}
