@@ -44,3 +44,18 @@ def test_search_limits(kwargs, message):
 def test_naive_start_is_rejected():
     with pytest.raises(ValueError, match="timezone-aware"):
         next_occurrences(parse_cron("* * * * *"), after=datetime(2030, 1, 1))
+
+
+@pytest.mark.parametrize("after", [datetime(1, 1, 1, tzinfo=UTC), datetime(9998, 12, 31, tzinfo=UTC)])
+def test_window_must_stay_in_supported_utc_years(after):
+    with pytest.raises(ValueError, match="years 0002–9998"):
+        next_occurrences(parse_cron("* * * * *"), after=after, search_days=1)
+
+
+def test_leap_day_is_found_with_a_longer_horizon():
+    schedule = parse_cron("0 0 29 2 *")
+    after = datetime(2029, 1, 1, tzinfo=UTC)
+    assert next_occurrences(schedule, after=after) == ()
+    assert next_occurrences(schedule, after=after, count=1, search_days=1200) == (
+        datetime(2032, 2, 29, tzinfo=UTC),
+    )

@@ -17,6 +17,14 @@ for instant in next_occurrences(schedule, after=after, count=2):
 
 The starting instant is exclusive, so the example prints January 2 and 3 at 08:15 UTC.
 
+Pass `zone=ZoneInfo("America/New_York")` (from Python's `zoneinfo` module) to evaluate wall-clock fields in that zone. The start may have any explicit offset; it identifies an instant independently of the schedule zone. The API always returns UTC datetimes.
+
+## Time zones and search limits
+
+- A skipped local minute never fires. A repeated local minute produces two distinct UTC instants, returned in chronological order. This is a preview policy; some cron daemons apply different DST rules.
+- Search uses an exclusive start and an inclusive end. A search day is exactly 24 elapsed hours, including across DST. The default horizon is 366 days (allowed: 1–3660), and the default count is 5 (allowed: 1–100). The window must stay within UTC years 0002–9998. Fewer results, including none, are valid when the horizon is exhausted.
+- Results use the locally installed IANA time-zone rules. Historical data and future rule projections can differ between database versions.
+
 ## Supported cron syntax
 
 Use exactly five whitespace-separated fields, in this order:
