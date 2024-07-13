@@ -1,0 +1,9 @@
+{
+  "title": "January Thursday matches on a February Friday in UTC",
+  "expression": "0 23 * JAN THU",
+  "zone": "Pacific/Honolulu",
+  "after": "2030-01-25T08:59Z",
+  "count": 3,
+  "search_days": 8,
+  "expected_utc": ["2030-01-25T09:00Z", "2030-02-01T09:00Z"]
+}
