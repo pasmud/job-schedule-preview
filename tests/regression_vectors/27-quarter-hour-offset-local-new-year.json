@@ -1,0 +1,9 @@
+{
+  "title": "A quarter-hour zone orders local New Year within one UTC day",
+  "expression": "0 0,23 * DEC,JAN MON-TUE",
+  "zone": "Pacific/Chatham",
+  "after": "2029-12-31T09:14Z",
+  "count": 3,
+  "search_days": 2,
+  "expected_utc": ["2029-12-31T09:15Z", "2029-12-31T10:15Z", "2030-01-01T09:15Z"]
+}
