@@ -1,0 +1,9 @@
+{
+  "title": "An occurrence one microsecond past the horizon is excluded",
+  "expression": "15 0 * JAN TUE-WED",
+  "zone": "UTC",
+  "after": "2030-01-01T00:14:59.999999Z",
+  "count": 2,
+  "search_days": 1,
+  "expected_utc": ["2030-01-01T00:15Z"]
+}
