@@ -1,0 +1,9 @@
+{
+  "title": "The earliest supported UTC year can match local year one",
+  "expression": "15 19 31 DEC *",
+  "zone": "Etc/GMT+5",
+  "after": "0002-01-01T00:00Z",
+  "count": 2,
+  "search_days": 1,
+  "expected_utc": ["0002-01-01T00:15Z"]
+}
