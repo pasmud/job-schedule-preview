@@ -1,0 +1,9 @@
+{
+  "title": "March gap preserves the last old and first new local minutes",
+  "expression": "0,59 0-2 * MAR SUN",
+  "zone": "Europe/London",
+  "after": "2024-03-31T00:58Z",
+  "count": 4,
+  "search_days": 1,
+  "expected_utc": ["2024-03-31T00:59Z", "2024-03-31T01:00Z", "2024-03-31T01:59Z"]
+}
