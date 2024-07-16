@@ -1,0 +1,9 @@
+{
+  "title": "Skipping a stepped hour preserves the later minute phase",
+  "expression": "15-55/20 2-4/2 * MAR SUN",
+  "zone": "Europe/Berlin",
+  "after": "2024-03-31T00:00Z",
+  "count": 4,
+  "search_days": 1,
+  "expected_utc": ["2024-03-31T02:15Z", "2024-03-31T02:35Z", "2024-03-31T02:55Z"]
+}
