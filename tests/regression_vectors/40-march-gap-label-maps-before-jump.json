@@ -1,0 +1,9 @@
+{
+  "title": "A gap label with the new offset can still start before the jump",
+  "expression": "15,45 0-2 * MAR SUN",
+  "zone": "Europe/Lisbon",
+  "after": "2024-03-31T01:20+01:00",
+  "count": 3,
+  "search_days": 1,
+  "expected_utc": ["2024-03-31T00:45Z", "2024-03-31T01:15Z", "2024-03-31T01:45Z"]
+}
