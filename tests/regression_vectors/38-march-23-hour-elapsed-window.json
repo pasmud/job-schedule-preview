@@ -1,0 +1,9 @@
+{
+  "title": "The spring horizon includes a time later on the wall clock",
+  "expression": "10 3,4 * MAR SAT,SUN",
+  "zone": "Europe/Helsinki",
+  "after": "2024-03-30T03:10+02:00",
+  "count": 3,
+  "search_days": 1,
+  "expected_utc": ["2024-03-30T02:10Z", "2024-03-31T01:10Z"]
+}
