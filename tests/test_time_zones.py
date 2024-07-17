@@ -62,3 +62,31 @@ def test_search_days_measure_elapsed_time_during_fall_transition():
         search_days=1,
     )
     assert actual == ()  # The next local noon is 25 hours after the start.
+
+
+@pytest.mark.parametrize(
+    ("after", "expected"),
+    [
+        ("2024-11-03T01:30-04:00", ["2024-11-03T05:30Z", "2024-11-03T06:30Z"]),
+        ("2024-11-03T01:30-05:00", ["2024-11-03T06:30Z", "2024-11-04T06:30Z"]),
+        ("2024-11-03T01:30:00.000001-04:00", ["2024-11-03T06:30Z"]),
+    ],
+)
+def test_include_start_matches_exact_instant_in_fall_fold(after, expected):
+    assert next_occurrences(
+        parse_cron("30 1 * * *"),
+        after=datetime.fromisoformat(after),
+        zone=ZoneInfo("America/New_York"),
+        search_days=1,
+        include_start=True,
+    ) == tuple(map(datetime.fromisoformat, expected))
+
+
+def test_include_start_does_not_restore_a_skipped_spring_minute():
+    assert next_occurrences(
+        parse_cron("30 2 * * *"),
+        after=datetime.fromisoformat("2024-03-10T02:30-05:00"),
+        zone=ZoneInfo("America/New_York"),
+        search_days=1,
+        include_start=True,
+    ) == (datetime.fromisoformat("2024-03-11T06:30Z"),)

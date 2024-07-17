@@ -28,9 +28,11 @@ job-schedule-preview '30 1 * * *' --zone America/New_York \
 
 Quote the cron expression so the shell does not expand `*`. `--zone` requires an IANA identifier such as `UTC` or `America/New_York`; the schedule never uses an implicit machine zone. `--after` requires `YYYY-MM-DDTHH:MM[:SS[.ffffff]]` followed by `Z` or a numeric offset (`±HH:MM`). Neither argument defaults to the machine clock or local time.
 
+By default `--after` is exclusive. Pass `--include-start` to include a match exactly at that instant. During the fall transition above, `--after 2024-11-03T01:30:00-05:00 --include-start` starts with the second 01:30; the first one is already in the past relative to that offset.
+
 `python -m job_schedule_preview` accepts the same arguments and can also be run from the repository root if time-zone data is available.
 
-Text output has no header: one occurrence per line, local timestamp with offset followed by UTC, separated by a tab. `--format json` instead prints one object containing `zone`, `after_utc`, `requested_count`, `search_days`, `complete`, and an `occurrences` array of `{ "local": "...", "utc": "..." }` objects. `complete` means the requested count was reached within the window.
+Text output has no header: one occurrence per line, local timestamp with offset followed by UTC, separated by a tab. `--format json` instead prints one object containing `zone`, `after_utc`, `requested_count`, `search_days`, `complete`, and an `occurrences` array of `{ "local": "...", "utc": "..." }` objects. `complete` means the requested count was reached within the window. With `--include-start`, the JSON also contains `"include_start": true`.
 
 For a fictional job that runs only on leap day, a short preview can legitimately return no matches:
 
@@ -54,14 +56,14 @@ for instant in next_occurrences(schedule, after=after, count=2):
     print(instant.isoformat())
 ```
 
-The starting instant is exclusive, so the example prints January 2 and 3 at 08:15 UTC.
+The starting instant is exclusive by default, so the example prints January 2 and 3 at 08:15 UTC. Pass `include_start=True` to include January 1 as the first result.
 
 Pass `zone=ZoneInfo("America/New_York")` (from Python's `zoneinfo` module) to evaluate wall-clock fields in that zone. The start may have any explicit offset; it identifies an instant independently of the schedule zone. The API always returns UTC datetimes.
 
 ## Time zones and search limits
 
 - A skipped local minute never fires. A repeated local minute produces two distinct UTC instants, returned in chronological order. This is a preview policy; some cron daemons apply different DST rules.
-- Search uses an exclusive start and an inclusive end. A search day is exactly 24 elapsed hours, including across DST. The default horizon is 366 days (allowed: 1–3660), and the default count is 5 (allowed: 1–100). The window must stay within UTC years 0002–9998. Fewer results, including none, are valid when the horizon is exhausted.
+- Search uses an exclusive start by default and an inclusive end. Opting into start inclusion compares exact instants without rounding, and does not move the end. A search day is exactly 24 elapsed hours, including across DST. The default horizon is 366 days (allowed: 1–3660), and the default count is 5 (allowed: 1–100). The window must stay within UTC years 0002–9998. Fewer results, including none, are valid when the horizon is exhausted.
 - Results use the system IANA database when the zone is available there, or the installed `tzdata` package otherwise. Historical data and future rule projections can differ between database versions.
 
 ## Supported cron syntax

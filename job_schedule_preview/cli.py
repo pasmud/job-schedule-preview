@@ -55,7 +55,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     parser.add_argument("expression", help="quoted five-field cron expression (month/day names allowed)")
     parser.add_argument("--zone", required=True, type=_parse_zone, help="IANA time zone (e.g. UTC)")
-    parser.add_argument("--after", required=True, type=_parse_after, help="exclusive timestamp with offset")
+    parser.add_argument(
+        "--after", required=True, type=_parse_after, help="start timestamp with offset (exclusive by default)",
+    )
+    parser.add_argument(
+        "--include-start", action="store_true", help="include a match exactly at --after",
+    )
     parser.add_argument(
         "--count",
         type=int,
@@ -78,6 +83,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             zone=args.zone,
             count=args.count,
             search_days=args.search_days,
+            include_start=args.include_start,
         )
     except ValueError as exc:
         parser.error(str(exc))
@@ -96,6 +102,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "complete": complete,
             "occurrences": occurrences,
         }
+        if args.include_start:
+            report["include_start"] = True
         print(json.dumps(report, indent=2))
     else:
         for occurrence in occurrences:

@@ -34,7 +34,8 @@ def test_invalid_expression(expression, message):
 
 @pytest.mark.parametrize(
     ("kwargs", "message"),
-    [({"count": 0}, "count"), ({"search_days": 3661}, "search_days")],
+    [({"count": 0}, "count"), ({"search_days": 3661}, "search_days"),
+     ({"include_start": "false"}, "include_start")],
 )
 def test_search_limits(kwargs, message):
     with pytest.raises(ValueError, match=message):

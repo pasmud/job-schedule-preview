@@ -29,12 +29,18 @@ def next_occurrences(
     zone: tzinfo = UTC,
     count: int = DEFAULT_COUNT,
     search_days: int = DEFAULT_SEARCH_DAYS,
+    include_start: bool = False,
 ) -> tuple[datetime, ...]:
-    """Match in zone and return up to count UTC instants in (after, after + search_days]."""
+    """Return up to count UTC matches in an elapsed window with an inclusive end.
+
+    The start is exclusive unless include_start is True.
+    """
     if type(count) is not int or not 1 <= count <= MAX_COUNT:
         raise ValueError(f"count must be an integer from 1 to {MAX_COUNT}")
     if type(search_days) is not int or not 1 <= search_days <= MAX_SEARCH_DAYS:
         raise ValueError(f"search_days must be an integer from 1 to {MAX_SEARCH_DAYS}")
+    if type(include_start) is not bool:
+        raise ValueError("include_start must be a boolean")
     if after.utcoffset() is None:
         raise ValueError("after must be a timezone-aware datetime")
 
@@ -64,7 +70,9 @@ def next_occurrences(
             instant
             for local_day in range(ordinal - 1, ordinal + 2)
             for instant in local_day_instants(local_day)
-            if instant.date() == utc_day and start < instant <= end
+            if instant.date() == utc_day
+            and start <= instant <= end
+            and (include_start or instant != start)
         )
         matches.extend(candidates[: count - len(matches)])
         if len(matches) == count:

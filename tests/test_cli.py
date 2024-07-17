@@ -54,6 +54,21 @@ def test_json_output_with_partial_results_and_normalized_start():
     }
 
 
+def test_include_start_is_reflected_in_json_and_returns_the_matching_fold():
+    result = run_cli(
+        "30 1 * * *", "--zone", "America/New_York", "--after", "2024-11-03T01:30-05:00",
+        "--count", "1", "--format", "json", "--include-start",
+    )
+    assert result.returncode == 0
+    assert result.stderr == ""
+    report = json.loads(result.stdout)
+    assert report["include_start"] is True
+    assert report["after_utc"] == "2024-11-03T06:30:00Z"
+    assert report["occurrences"] == [
+        {"local": "2024-11-03T01:30:00-05:00", "utc": "2024-11-03T06:30:00Z"},
+    ]
+
+
 def test_empty_text_preview_is_successful_with_stderr_notice():
     result = run_cli("0 9 29 2 *", "--zone", "UTC", "--after", "2030-01-01T00:00Z", "--search-days", "30")
     assert result.returncode == 0
