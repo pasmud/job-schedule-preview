@@ -1,0 +1,9 @@
+{
+  "title": "A stepped date filter keeps Sundays across the March offset change",
+  "expression": "15 3 */2 MAR SUN",
+  "zone": "America/New_York",
+  "after": "2024-03-01T00:00Z",
+  "count": 4,
+  "search_days": 31,
+  "expected_utc": ["2024-03-03T08:15Z", "2024-03-17T07:15Z", "2024-03-31T07:15Z"]
+}
