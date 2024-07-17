@@ -1,0 +1,10 @@
+{
+  "title": "A gap label can denote an includable post-jump instant",
+  "expression": "20,40 2-3 * MAR SUN",
+  "zone": "Europe/Rome",
+  "after": "2024-03-31T02:20+01:00",
+  "count": 2,
+  "search_days": 1,
+  "include_start": true,
+  "expected_utc": ["2024-03-31T01:20Z", "2024-03-31T01:40Z"]
+}
