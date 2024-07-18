@@ -1,0 +1,9 @@
+{
+  "title": "A missing hour on a day-of-month match is not shifted",
+  "expression": "30 2 10 MAR TUE",
+  "zone": "America/New_York",
+  "after": "2024-03-09T00:00Z",
+  "count": 2,
+  "search_days": 5,
+  "expected_utc": ["2024-03-12T06:30Z"]
+}
