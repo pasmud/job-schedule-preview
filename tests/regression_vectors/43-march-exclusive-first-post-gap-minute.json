@@ -1,0 +1,9 @@
+{
+  "title": "An exclusive start at the jump skips the first valid minute",
+  "expression": "*/15 2-3 * MAR SUN",
+  "zone": "America/Chicago",
+  "after": "2024-03-10T03:00-05:00",
+  "count": 4,
+  "search_days": 1,
+  "expected_utc": ["2024-03-10T08:15Z", "2024-03-10T08:30Z", "2024-03-10T08:45Z"]
+}
