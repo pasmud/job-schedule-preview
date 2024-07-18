@@ -2,6 +2,33 @@
 
 Preview the next occurrences of a five-field cron expression. The tool works offline and never executes scheduled jobs.
 
+## CLI
+
+Run with Python 3.11 or later. This fictional report schedule hits 01:30 twice during a fall transition:
+
+```sh
+python -m job_schedule_preview '30 1 * * *' --zone America/New_York \
+  --after 2024-11-03T00:00:00-04:00 --count 2
+```
+
+```text
+2024-11-03T01:30:00-04:00	2024-11-03T05:30:00Z
+2024-11-03T01:30:00-05:00	2024-11-03T06:30:00Z
+```
+
+Quote the cron expression so the shell does not expand `*`. `--zone` requires an IANA identifier such as `UTC` or `America/New_York`; the schedule never uses an implicit machine zone. `--after` requires `YYYY-MM-DDTHH:MM[:SS[.ffffff]]` followed by `Z` or a numeric offset (`±HH:MM`). Neither argument defaults to the machine clock or local time.
+
+Text output has no header: one occurrence per line, local timestamp with offset followed by UTC, separated by a tab. `--format json` instead prints one object containing `zone`, `after_utc`, `requested_count`, `search_days`, `complete`, and an `occurrences` array of `{ "local": "...", "utc": "..." }` objects. `complete` means the requested count was reached within the window.
+
+For a fictional job that runs only on leap day, a short preview can legitimately return no matches:
+
+```sh
+python -m job_schedule_preview '0 9 29 2 *' --zone UTC \
+  --after 2030-01-01T00:00Z --search-days 30 --format json
+```
+
+A valid preview exits `0`, including empty or partial results. Text mode reports a shortfall on stderr; JSON mode reports it through `complete: false` and the array length. Invalid arguments exit `2` with a diagnostic on stderr and no results on stdout. Use `--help` for argument details.
+
 ## UTC preview from Python
 
 ```python
