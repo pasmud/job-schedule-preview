@@ -1,0 +1,9 @@
+{
+  "title": "A spring jump exactly at the elapsed end is included",
+  "expression": "0 2-3 * MAR SAT,SUN",
+  "zone": "America/Halifax",
+  "after": "2024-03-09T02:00-04:00",
+  "count": 3,
+  "search_days": 1,
+  "expected_utc": ["2024-03-09T07:00Z", "2024-03-10T06:00Z"]
+}
