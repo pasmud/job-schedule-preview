@@ -1,0 +1,9 @@
+{
+  "title": "Late local weekend matches shift UTC time after the March jump",
+  "expression": "45 23 * MAR SAT-7",
+  "zone": "America/New_York",
+  "after": "2024-03-10T00:00Z",
+  "count": 2,
+  "search_days": 2,
+  "expected_utc": ["2024-03-10T04:45Z", "2024-03-11T03:45Z"]
+}
