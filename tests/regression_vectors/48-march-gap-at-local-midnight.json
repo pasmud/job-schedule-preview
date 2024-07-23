@@ -1,0 +1,9 @@
+{
+  "title": "A midnight March gap does not suppress the whole Sunday",
+  "expression": "0 0,1 31 MAR SUN",
+  "zone": "Atlantic/Azores",
+  "after": "2024-03-31T00:00Z",
+  "count": 2,
+  "search_days": 1,
+  "expected_utc": ["2024-03-31T01:00Z"]
+}
