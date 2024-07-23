@@ -1,0 +1,9 @@
+{
+  "title": "March gap skips an hour with half-hour offsets on both sides",
+  "expression": "40 1-4 * MAR SUN",
+  "zone": "America/St_Johns",
+  "after": "2024-03-10T05:09Z",
+  "count": 4,
+  "search_days": 1,
+  "expected_utc": ["2024-03-10T05:10Z", "2024-03-10T06:10Z", "2024-03-10T07:10Z"]
+}
