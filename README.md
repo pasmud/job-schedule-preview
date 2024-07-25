@@ -37,9 +37,18 @@ Text output has no header: one occurrence per line, local timestamp with offset 
 For a fictional job that runs only on leap day, a short preview can legitimately return no matches:
 
 ```sh
-python -m job_schedule_preview '0 9 29 2 *' --zone UTC \
+python -m job_schedule_preview '0 9 29 FEB *' --zone UTC \
   --after 2030-01-01T00:00Z --search-days 30 --format json
 ```
+
+A longer horizon can find the next leap day. Set `--count 1` when you only need the next occurrence:
+
+```sh
+python -m job_schedule_preview '0 9 29 FEB *' --zone UTC \
+  --after 2030-01-01T00:00Z --search-days 800 --count 1
+```
+
+This previews February 29, 2032 at 09:00 UTC.
 
 A valid preview exits `0`, including empty or partial results. Text mode reports a shortfall on stderr; JSON mode reports it through `complete: false` and the array length. Invalid arguments exit `2` with a diagnostic on stderr and no results on stdout. Use `--help` for argument details.
 
@@ -64,6 +73,7 @@ Pass `zone=ZoneInfo("America/New_York")` (from Python's `zoneinfo` module) to ev
 
 - A skipped local minute never fires. A repeated local minute produces two distinct UTC instants, returned in chronological order. This is a preview policy; some cron daemons apply different DST rules.
 - Search uses an exclusive start by default and an inclusive end. Opting into start inclusion compares exact instants without rounding, and does not move the end. A search day is exactly 24 elapsed hours, including across DST. The default horizon is 366 days (allowed: 1–3660), and the default count is 5 (allowed: 1–100). The window must stay within UTC years 0002–9998. Fewer results, including none, are valid when the horizon is exhausted.
+- For schedules that restrict months, the preview skips UTC dates that cannot overlap a selected local month. An occurrence still counts if its local date and its UTC date fall in different months or years.
 - Results use the system IANA database when the zone is available there, or the installed `tzdata` package otherwise. Historical data and future rule projections can differ between database versions.
 
 ## Supported cron syntax

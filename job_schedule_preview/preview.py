@@ -1,5 +1,6 @@
 """Bounded searches for occurrences on the UTC timeline."""
 
+from calendar import monthrange
 from collections.abc import Iterator
 from datetime import UTC, date, datetime, timedelta, tzinfo
 from functools import lru_cache
@@ -20,6 +21,26 @@ def _utc_instants(wall: datetime, zone: tzinfo) -> Iterator[datetime]:
         if instant != previous and instant.astimezone(zone).replace(tzinfo=None) == wall:
             yield instant
         previous = instant
+
+
+def _candidate_utc_days(first: int, last: int, months: tuple[int, ...]) -> Iterator[int]:
+    if len(months) == 12:
+        yield from range(first, last + 1)
+        return
+
+    # An offset is less than 24 hours, so an allowed local month can
+    # contribute matches to the UTC date just before or after that month.
+    first_year = date.fromordinal(first - 1).year
+    last_year = date.fromordinal(last + 1).year
+    next_day = first
+    for year in range(first_year, last_year + 1):
+        for month in months:
+            month_start = date(year, month, 1).toordinal()
+            lo = max(next_day, month_start - 1)
+            hi = min(last, month_start + monthrange(year, month)[1])
+            if lo <= hi:
+                yield from range(lo, hi + 1)
+                next_day = hi + 1  # Adjacent allowed months can overlap after padding.
 
 
 def next_occurrences(
@@ -61,7 +82,9 @@ def next_occurrences(
         )
 
     matches: list[datetime] = []
-    for ordinal in range(start.date().toordinal(), end.date().toordinal() + 1):
+    for ordinal in _candidate_utc_days(
+        start.date().toordinal(), end.date().toordinal(), schedule.month.values,
+    ):
         utc_day = date.fromordinal(ordinal)
         # Offsets are less than 24 hours in magnitude. A UTC date can only
         # overlap these three local dates, even across a date-line transition.

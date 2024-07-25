@@ -60,3 +60,21 @@ def test_leap_day_is_found_with_a_longer_horizon():
     assert next_occurrences(schedule, after=after, count=1, search_days=1200) == (
         datetime(2032, 2, 29, tzinfo=UTC),
     )
+
+
+def test_sparse_search_skips_off_months_over_the_maximum_horizon(monkeypatch):
+    schedule = parse_cron("0 9 29 FEB *")
+    schedule_type = type(schedule)
+    wall_times = schedule_type.wall_times
+    days_examined = 0
+
+    def track_wall_times(self, day):
+        nonlocal days_examined
+        days_examined += 1
+        return wall_times(self, day)
+
+    monkeypatch.setattr(schedule_type, "wall_times", track_wall_times)
+    assert next_occurrences(
+        schedule, after=datetime(2096, 3, 1, tzinfo=UTC), search_days=3660,
+    ) == (datetime(2104, 2, 29, 9, tzinfo=UTC),)
+    assert days_examined < 365  # Less than a year's worth of dates in a ten-year search.

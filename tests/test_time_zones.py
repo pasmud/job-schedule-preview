@@ -90,3 +90,25 @@ def test_include_start_does_not_restore_a_skipped_spring_minute():
         search_days=1,
         include_start=True,
     ) == (datetime.fromisoformat("2024-03-11T06:30Z"),)
+
+
+@pytest.mark.parametrize(
+    ("zone", "expression", "after", "search_days", "expected"),
+    [
+        ("Pacific/Kiritimati", "0 0 1 JAN *", "2030-12-30T10:00Z", 1, ["2030-12-31T10:00Z"]),
+        ("Pacific/Pago_Pago", "0 23 31 DEC *", "2031-01-01T00:00Z", 1, ["2031-01-01T10:00Z"]),
+        (
+            "Pacific/Kiritimati", "0 0 1 JAN,DEC *", "2030-11-29T00:00Z", 40,
+            ["2030-11-30T10:00Z", "2030-12-31T10:00Z"],
+        ),
+    ],
+)
+def test_month_restrictions_apply_to_local_dates_not_utc_dates(
+    zone, expression, after, search_days, expected,
+):
+    assert next_occurrences(
+        parse_cron(expression),
+        after=datetime.fromisoformat(after),
+        zone=ZoneInfo(zone),
+        search_days=search_days,
+    ) == tuple(map(datetime.fromisoformat, expected))
