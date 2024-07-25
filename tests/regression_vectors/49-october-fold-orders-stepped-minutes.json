@@ -1,0 +1,12 @@
+{
+  "title": "Folded stepped minutes sort by instant across both passes",
+  "expression": "10-50/20 2 * OCT SUN",
+  "zone": "Europe/Berlin",
+  "after": "2024-10-27T00:09Z",
+  "count": 6,
+  "search_days": 1,
+  "expected_utc": [
+    "2024-10-27T00:10Z", "2024-10-27T00:30Z", "2024-10-27T00:50Z",
+    "2024-10-27T01:10Z", "2024-10-27T01:30Z", "2024-10-27T01:50Z"
+  ]
+}
