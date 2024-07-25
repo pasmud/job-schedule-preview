@@ -1,0 +1,9 @@
+{
+  "title": "Later instants can have earlier wall minutes in a fold",
+  "expression": "10,40 2 * OCT SUN",
+  "zone": "Europe/Stockholm",
+  "after": "2024-10-27T02:50+02:00",
+  "count": 3,
+  "search_days": 1,
+  "expected_utc": ["2024-10-27T01:10Z", "2024-10-27T01:40Z"]
+}
