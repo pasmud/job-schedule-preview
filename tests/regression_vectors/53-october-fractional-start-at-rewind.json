@@ -1,0 +1,9 @@
+{
+  "title": "A start just before the rewind keeps the second hour boundary",
+  "expression": "0 1-2 * OCT SUN",
+  "zone": "Europe/London",
+  "after": "2024-10-27T00:59:59.999999Z",
+  "count": 2,
+  "search_days": 1,
+  "expected_utc": ["2024-10-27T01:00Z", "2024-10-27T02:00Z"]
+}
