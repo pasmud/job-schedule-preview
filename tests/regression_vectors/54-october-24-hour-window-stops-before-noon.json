@@ -1,0 +1,9 @@
+{
+  "title": "An autumn day window ends before the next local noon",
+  "expression": "0 11-12 * OCT SAT,SUN",
+  "zone": "Europe/London",
+  "after": "2024-10-26T12:00+01:00",
+  "count": 2,
+  "search_days": 1,
+  "expected_utc": ["2024-10-27T11:00Z"]
+}
