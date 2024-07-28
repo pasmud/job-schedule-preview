@@ -1,0 +1,9 @@
+{
+  "title": "The midnight hour repeats after a late Saturday occurrence",
+  "expression": "45 23,0,1 * OCT SAT,SUN",
+  "zone": "Atlantic/Azores",
+  "after": "2024-10-26T23:44Z",
+  "count": 4,
+  "search_days": 1,
+  "expected_utc": ["2024-10-26T23:45Z", "2024-10-27T00:45Z", "2024-10-27T01:45Z", "2024-10-27T02:45Z"]
+}
