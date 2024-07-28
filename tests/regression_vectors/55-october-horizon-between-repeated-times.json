@@ -1,0 +1,9 @@
+{
+  "title": "The first fold at the window end fits but the second does not",
+  "expression": "30 2 * OCT SAT,SUN",
+  "zone": "Europe/Berlin",
+  "after": "2024-10-26T02:30+02:00",
+  "count": 2,
+  "search_days": 1,
+  "expected_utc": ["2024-10-27T00:30Z"]
+}
