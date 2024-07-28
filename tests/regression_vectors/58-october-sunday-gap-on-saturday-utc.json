@@ -1,0 +1,9 @@
+{
+  "title": "A local Sunday spring gap is evaluated on Saturday in UTC",
+  "expression": "20 1-4 * OCT SUN",
+  "zone": "Australia/Adelaide",
+  "after": "2024-10-05T15:49Z",
+  "count": 4,
+  "search_days": 1,
+  "expected_utc": ["2024-10-05T15:50Z", "2024-10-05T16:50Z", "2024-10-05T17:50Z"]
+}
