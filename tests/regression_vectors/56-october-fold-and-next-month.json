@@ -1,0 +1,9 @@
+{
+  "title": "A folded October Sunday is followed by one November match",
+  "expression": "0 1 * OCT-NOV SUN",
+  "zone": "Europe/Lisbon",
+  "after": "2024-10-26T00:00Z",
+  "count": 4,
+  "search_days": 9,
+  "expected_utc": ["2024-10-27T00:00Z", "2024-10-27T01:00Z", "2024-11-03T01:00Z"]
+}
