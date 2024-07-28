@@ -1,0 +1,9 @@
+{
+  "title": "A half-hour spring jump brings the later minute to the horizon",
+  "expression": "0,30,45 3 * OCT SAT,SUN",
+  "zone": "Australia/Lord_Howe",
+  "after": "2024-10-05T03:00+10:30",
+  "count": 5,
+  "search_days": 1,
+  "expected_utc": ["2024-10-04T17:00Z", "2024-10-04T17:15Z", "2024-10-05T16:00Z", "2024-10-05T16:30Z"]
+}
