@@ -1,0 +1,9 @@
+{
+  "title": "A half-hour gap preserves the minute step after the jump",
+  "expression": "10-50/20 1-2 * OCT SUN",
+  "zone": "Australia/Lord_Howe",
+  "after": "2024-10-06T01:30+10:30",
+  "count": 4,
+  "search_days": 1,
+  "expected_utc": ["2024-10-05T15:20Z", "2024-10-05T15:30Z", "2024-10-05T15:50Z"]
+}
