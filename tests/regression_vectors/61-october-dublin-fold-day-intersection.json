@@ -1,0 +1,9 @@
+{
+  "title": "A stepped Sunday date admits both Dublin fold occurrences",
+  "expression": "30 1 */2 OCT SUN",
+  "zone": "Europe/Dublin",
+  "after": "2024-10-19T00:00Z",
+  "count": 3,
+  "search_days": 10,
+  "expected_utc": ["2024-10-27T00:30Z", "2024-10-27T01:30Z"]
+}
