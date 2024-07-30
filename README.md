@@ -2,12 +2,22 @@
 
 Preview the next occurrences of a five-field cron expression. The tool works offline and never executes scheduled jobs.
 
-## CLI
+## Installation
 
-Run with Python 3.11 or later. This fictional report schedule hits 01:30 twice during a fall transition:
+With Python 3.11 or later, install from the repository root in a virtual environment:
 
 ```sh
-python -m job_schedule_preview '30 1 * * *' --zone America/New_York \
+python -m pip install .
+```
+
+Installation includes the `tzdata` fallback for systems without an IANA database. After installation, previews need no network access.
+
+## CLI
+
+This fictional report schedule hits 01:30 twice during a fall transition:
+
+```sh
+job-schedule-preview '30 1 * * *' --zone America/New_York \
   --after 2024-11-03T00:00:00-04:00 --count 2
 ```
 
@@ -17,6 +27,8 @@ python -m job_schedule_preview '30 1 * * *' --zone America/New_York \
 ```
 
 Quote the cron expression so the shell does not expand `*`. `--zone` requires an IANA identifier such as `UTC` or `America/New_York`; the schedule never uses an implicit machine zone. `--after` requires `YYYY-MM-DDTHH:MM[:SS[.ffffff]]` followed by `Z` or a numeric offset (`±HH:MM`). Neither argument defaults to the machine clock or local time.
+
+`python -m job_schedule_preview` accepts the same arguments and can also be run from the repository root if time-zone data is available.
 
 Text output has no header: one occurrence per line, local timestamp with offset followed by UTC, separated by a tab. `--format json` instead prints one object containing `zone`, `after_utc`, `requested_count`, `search_days`, `complete`, and an `occurrences` array of `{ "local": "...", "utc": "..." }` objects. `complete` means the requested count was reached within the window.
 
@@ -50,7 +62,7 @@ Pass `zone=ZoneInfo("America/New_York")` (from Python's `zoneinfo` module) to ev
 
 - A skipped local minute never fires. A repeated local minute produces two distinct UTC instants, returned in chronological order. This is a preview policy; some cron daemons apply different DST rules.
 - Search uses an exclusive start and an inclusive end. A search day is exactly 24 elapsed hours, including across DST. The default horizon is 366 days (allowed: 1–3660), and the default count is 5 (allowed: 1–100). The window must stay within UTC years 0002–9998. Fewer results, including none, are valid when the horizon is exhausted.
-- Results use the locally installed IANA time-zone rules. Historical data and future rule projections can differ between database versions.
+- Results use the system IANA database when the zone is available there, or the installed `tzdata` package otherwise. Historical data and future rule projections can differ between database versions.
 
 ## Supported cron syntax
 
@@ -69,3 +81,11 @@ Each field accepts `*`, a number, an inclusive ascending range (`9-17`), or a co
 Minute, hour and month must all match. If neither day field starts with `*`, **either** day field may match. If either starts with `*` (including `*/n`), **both** must match. For example, a fictional `0 9 15 * 1` schedule runs at 09:00 on the 15th and on Mondays, once if both apply. `0 9 */2 * 1` matches only Mondays on odd-numbered days of the month.
 
 Named months/weekdays, wraparound ranges, steps on single numbers, seconds/year fields, macros such as `@daily`, and extensions such as `L`, `W`, `#` or `?` are unsupported. Calendar dates that do not exist never match.
+
+## Development
+
+```sh
+python -m pip install '.[dev]'
+python -m ruff check .
+python -m pytest -q
+```

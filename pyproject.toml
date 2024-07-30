@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "job-schedule-preview"
+version = "0.1.0"
+description = "Offline five-field cron previews with explicit time zones"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = ["tzdata"]
+
+[project.optional-dependencies]
+dev = ["pytest", "ruff"]
+
+[project.scripts]
+job-schedule-preview = "job_schedule_preview.cli:main"
+
+[tool.setuptools]
+packages = ["job_schedule_preview"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "UP"]
